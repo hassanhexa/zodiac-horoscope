@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiac Horoscope</title>
+</head>
+<body>
+    <h1>Zodiac Horoscope</h1>
+    <p>Enter your birthdate to see your horoscope:</p>
+    <form>
+        <label for="birthdate">Birthdate (MM/DD/YYYY):</label>
+        <input type="text" id="birthdate" name="birthdate" required>
+        <button type="button" onclick="getHoroscope()">Get Horoscope</button>
+    </form>
+    <div id="horoscopeResult"></div>
+
+    <script>
+        function getHoroscope() {
+            var birthdate = document.getElementById("birthdate").value;
+            // You can make an AJAX request here to your Python code hosted on a server, 
+            // or you can convert your Python code to JavaScript and run it here.
+            // For simplicity, you can display a placeholder message.
+            var resultDiv = document.getElementById("horoscopeResult");
+            resultDiv.innerHTML = "Your horoscope will appear here.";
+        }
+    </script>
+</body>
+</html>
