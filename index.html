@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zodiac Horoscope</title>
     <style>
-        /* Your existing styles remain unchanged */
         table {
             border-collapse: collapse;
             width: 100%;
@@ -37,13 +36,12 @@
             var birthdateInput = document.getElementById("birthdate").value;
             var zodiacInfo = calculateZodiacInfo(birthdateInput);
 
-            // Display the result with line breaks
+            // Display the result in a table
             var resultDiv = document.getElementById("horoscopeResult");
-            resultDiv.innerHTML = zodiacInfo.replace(/\n/g, "<br>");
+            resultDiv.innerHTML = zodiacInfo;
         }
 
         function calculateZodiacInfo(birthdateStr) {
-            {
             try {
                 // Parse the input birthdate string into a Date object
                 var birthdate = new Date(birthdateStr);
@@ -87,13 +85,12 @@
             }
         }
 
-            // Modify the return statement to format the result with line breaks
-            return "Zodiac Sign: " + sign + "<br>"
-                + "Description: " + description + "<br>"
-                + "Lucky Numbers: " + luckyNumbers + "<br>"
-                + "Lucky Color: " + luckyColor + "<br>"
-                + "Personality Traits: " + traits + "<br>"
-                + "Famous People: " + famousPeople;
+        function createTable(sign, description, luckyNumbers, luckyColor, traits, famousPeople) {
+            var tableHtml = "<table>";
+            tableHtml += "<tr><th>Zodiac Sign</th><th>Description</th><th>Lucky Numbers</th><th>Lucky Color</th><th>Personality Traits</th><th>Famous People</th></tr>";
+            tableHtml += "<tr><td>" + sign + "</td><td>" + description + "</td><td>" + luckyNumbers + "</td><td>" + luckyColor + "</td><td>" + traits + "</td><td>" + famousPeople + "</td></tr>";
+            tableHtml += "</table>";
+            return tableHtml;
         }
     </script>
 </body>
