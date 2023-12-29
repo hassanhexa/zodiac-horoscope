@@ -5,16 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zodiac Horoscope</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #009688;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00796b;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #009688;
             color: white;
@@ -22,74 +79,153 @@
     </style>
 </head>
 <body>
-    <h1>Zodiac Horoscope</h1>
-    <p>Enter your birthdate to see your horoscope:</p>
-    <form id="horoscopeForm">
-        <label for="birthdate">Birthdate (MM/DD/YYYY):</label>
-        <input type="text" id="birthdate" name="birthdate" required>
-        <button type="button" onclick="getZodiacInfo()">Get Horoscope</button>
-    </form>
-    <div id="horoscopeResult"></div>
+    <div id="container">
+        <h1>Zodiac Horoscope</h1>
+        <p>Enter your birthdate to see your horoscope:</p>
+        <form id="horoscopeForm">
+            <label for="birthdate">Birthdate (MM/DD/YYYY):</label>
+            <input type="text" id="birthdate" name="birthdate" required>
+            <button type="button" onclick="getZodiacInfo()">Get Horoscope</button>
+        </form>
+        <div id="horoscopeResult"></div>
+    </div>
 
     <script>
         function getZodiacInfo() {
             var birthdateInput = document.getElementById("birthdate").value;
             var zodiacInfo = calculateZodiacInfo(birthdateInput);
 
-            // Display the result in a table
+            // Display the result as an HTML table
             var resultDiv = document.getElementById("horoscopeResult");
             resultDiv.innerHTML = zodiacInfo;
         }
 
-        function calculateZodiacInfo(birthdateStr) {
-            try {
-                // Parse the input birthdate string into a Date object
-                var birthdate = new Date(birthdateStr);
-
-                // Determine the zodiac sign based on the birthdate
-                if ((birthdate.getMonth() + 1 === 3 && birthdate.getDate() >= 21) || (birthdate.getMonth() + 1 === 4 && birthdate.getDate() <= 19)) {
-                    return createTable("Aries", "You'll discover hidden talents and skills within yourself this month!", "7, 12, 21", "Red", "Energetic, Courageous, Spontaneous", "Lady Gaga, Leonardo da Vinci, Elton John");
-                } else if ((birthdate.getMonth() + 1 === 4 && birthdate.getDate() >= 20) || (birthdate.getMonth() + 1 === 5 && birthdate.getDate() <= 20)) {
-                    return createTable("Taurus", "Unexpected financial gains are coming your way. Be prepared!", "2, 6, 15", "Green", "Reliable, Patient, Practical", "Adele, William Shakespeare, Audrey Hepburn");
-                } else if ((birthdate.getMonth() + 1 === 5 && birthdate.getDate() >= 21) || (birthdate.getMonth() + 1 === 6 && birthdate.getDate() <= 20)) {
-                    return createTable("Gemini", "A surprise adventure is on the horizon. Embrace the unexpected!", "5, 11, 23", "Yellow", "Adaptable, Curious, Witty", "Angelina Jolie, Johnny Depp, Kanye West");
-                } else if ((birthdate.getMonth() + 1 === 6 && birthdate.getDate() >= 21) || (birthdate.getMonth() + 1 === 7 && birthdate.getDate() <= 22)) {
-                    return createTable("Cancer", "Your positive energy will attract good fortune. Stay optimistic!", "3, 9, 17", "Silver", "Nurturing, Intuitive, Protective", "Princess Diana, Tom Hanks, Elon Musk");
-                } else if ((birthdate.getMonth() + 1 === 7 && birthdate.getDate() >= 23) || (birthdate.getMonth() + 1 === 8 && birthdate.getDate() <= 22)) {
-                    return createTable("Leo", "An old friend will reappear in your life, bringing joy and nostalgia!", "1, 8, 22", "Gold", "Charismatic, Confident, Creative", "Barack Obama, Jennifer Lopez, Mick Jagger");
-                } else if ((birthdate.getMonth() + 1 === 8 && birthdate.getDate() >= 23) || (birthdate.getMonth() + 1 === 9 && birthdate.getDate() <= 22)) {
-                    return createTable("Virgo", "A long-standing goal will finally be achieved. Celebrate your success!", "4, 10, 24", "Green", "Detail-Oriented, Practical, Analytical", "Beyoncé, Mother Teresa, Tim Burton");
-                } else if ((birthdate.getMonth() + 1 === 9 && birthdate.getDate() >= 23) || (birthdate.getMonth() + 1 === 10 && birthdate.getDate() <= 22)) {
-                    return createTable("Libra", "A new love interest will enter your life. Keep an open heart!", "6, 15, 21", "Blue", "Charming, Diplomatic, Social", "Mahatma Gandhi, Kim Kardashian, Will Smith");
-                } else if ((birthdate.getMonth() + 1 === 10 && birthdate.getDate() >= 23) || (birthdate.getMonth() + 1 === 11 && birthdate.getDate() <= 21)) {
-                    return createTable("Scorpio", "Your creativity will reach new heights. Express yourself boldly!", "9, 18, 27", "Black", "Intense, Ambitious, Resourceful", "Leonardo DiCaprio, Marie Curie, Bill Gates");
-                } else if ((birthdate.getMonth() + 1 === 11 && birthdate.getDate() >= 22) || (birthdate.getMonth() + 1 === 12 && birthdate.getDate() <= 21)) {
-                    return createTable("Sagittarius", "Travel plans will unexpectedly fall into place. Pack your bags!", "3, 12, 21", "Purple", "Optimistic, Adventurous, Independent", "Walt Disney, Taylor Swift, Brad Pitt");
-                } else if ((birthdate.getMonth() + 1 === 12 && birthdate.getDate() >= 22) || (birthdate.getMonth() + 1 === 1 && birthdate.getDate() <= 19)) {
-                    return createTable("Capricorn", "Stay cautious while traveling. Avoid unnecessary risks.", "4, 8, 22", "Brown", "Disciplined, Ambitious, Practical", "Michelle Obama, Elvis Presley, Steve Jobs");
-                } else if ((birthdate.getMonth() + 1 === 1 && birthdate.getDate() >= 20) || (birthdate.getMonth() + 1 === 2 && birthdate.getDate() <= 18)) {
-                    return createTable("Aquarius", "Financial opportunities are coming your way. Be ready to seize them!", "5, 15, 23", "Aqua", "Innovative, Humanitarian, Eccentric", "Oprah Winfrey, Abraham Lincoln, Ellen DeGeneres");
-                } else if ((birthdate.getMonth() + 1 === 2 && birthdate.getDate() >= 19) || (birthdate.getMonth() + 1 === 3 && birthdate.getDate() <= 20)) {
-                    return createTable("Pisces", "A serendipitous encounter will lead to new and meaningful connections.", "7, 12, 18", "Sea Green", "Compassionate, Imaginative, Intuitive", "Rihanna, Albert Einstein, Kurt Cobain");
-                }
-
-                // If the birthdate is in the future
-                if (birthdate > new Date()) {
-                    return "Birthdate is in the future.";
-                }
-
-                // For all other cases, return an error message
-                return "Unable to determine zodiac sign.";
-            } catch (error) {
-                return "Invalid date format. Please use MM/DD/YYYY.";
-            }
+            function calculateZodiacInfo(birthdateStr) {
+    try {
+        var birthdate = new Date(birthdateStr);
+        
+        if (isNaN(birthdate.getTime())) {
+            return "Invalid date format. Please use MM/DD/YYYY.";
         }
 
-        function createTable(sign, description, luckyNumbers, luckyColor, traits, famousPeople) {
+        // Determine the zodiac sign based on the birthdate
+        var month = birthdate.getMonth() + 1; // Months are 0-indexed in JavaScript
+        var day = birthdate.getDate();
+        var sign, description, luckyNumbers, luckyColor, traits, famousPeople;
+
+        if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
+            sign = "Aries";
+            description = "You'll discover hidden talents and skills within yourself this month!";
+            luckyNumbers = "7, 12, 21";
+            luckyColor = "Red";
+            traits = "Energetic, Courageous, Spontaneous";
+            famousPeople = "Lady Gaga, Leonardo da Vinci, Elton John";
+        } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+            sign = "Taurus";
+            description = "Unexpected financial gains are coming your way. Be prepared!";
+            luckyNumbers = "2, 6, 15";
+            luckyColor = "Green";
+            traits = "Reliable, Patient, Practical";
+            famousPeople = "Adele, William Shakespeare, Audrey Hepburn";
+        } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+            sign = "Gemini";
+            description = "A surprise adventure is on the horizon. Embrace the unexpected!";
+            luckyNumbers = "5, 11, 23";
+            luckyColor = "Yellow";
+            traits = "Adaptable, Curious, Witty";
+            famousPeople = "Angelina Jolie, Johnny Depp, Kanye West";
+        } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
+            sign = "Cancer";
+            description = "Your positive energy will attract good fortune. Stay optimistic!";
+            luckyNumbers = "3, 9, 17";
+            luckyColor = "Silver";
+            traits = "Nurturing, Intuitive, Protective";
+            famousPeople = "Princess Diana, Tom Hanks, Elon Musk";
+        } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
+            sign = "Leo";
+            description = "An old friend will reappear in your life, bringing joy and nostalgia!";
+            luckyNumbers = "1, 8, 22";
+            luckyColor = "Gold";
+            traits = "Charismatic, Confident, Creative";
+            famousPeople = "Barack Obama, Jennifer Lopez, Mick Jagger";
+        } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
+            sign = "Virgo";
+            description = "A long-standing goal will finally be achieved. Celebrate your success!";
+            luckyNumbers = "4, 10, 24";
+            luckyColor = "Green";
+            traits = "Detail-Oriented, Practical, Analytical";
+            famousPeople = "Beyoncé, Mother Teresa, Tim Burton";
+        } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
+            sign = "Libra";
+            description = "A new love interest will enter your life. Keep an open heart!";
+            luckyNumbers = "6, 15, 21";
+            luckyColor = "Blue";
+            traits = "Charming, Diplomatic, Social";
+            famousPeople = "Mahatma Gandhi, Kim Kardashian, Will Smith";
+        } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
+            sign = "Scorpio";
+            description = "Your creativity will reach new heights. Express yourself boldly!";
+            luckyNumbers = "9, 18, 27";
+            luckyColor = "Black";
+            traits = "Intense, Ambitious, Resourceful";
+            famousPeople = "Leonardo DiCaprio, Marie Curie, Bill Gates";
+        } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+            sign = "Sagittarius";
+            description = "Travel plans will unexpectedly fall into place. Pack your bags!";
+            luckyNumbers = "3, 12, 21";
+            luckyColor = "Purple";
+            traits = "Optimistic, Adventurous, Independent";
+            famousPeople = "Walt Disney, Taylor Swift, Brad Pitt";
+        } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+            sign = "Capricorn";
+            description = "Stay cautious while traveling. Avoid unnecessary risks.";
+            luckyNumbers = "4, 8, 22";
+            luckyColor = "Brown";
+            traits = "Disciplined, Ambitious, Practical";
+            famousPeople = "Michelle Obama, Elvis Presley, Steve Jobs";
+        } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
+            sign = "Aquarius";
+            description = "Financial opportunities are coming your way. Be ready to seize them!";
+            luckyNumbers = "5, 15, 23";
+            luckyColor = "Aqua";
+            traits = "Innovative, Humanitarian, Eccentric";
+            famousPeople = "Oprah Winfrey, Abraham Lincoln, Ellen DeGeneres";
+        } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
+            sign = "Pisces";
+            description = "A serendipitous encounter will lead to new and meaningful connections.";
+            luckyNumbers = "7, 12, 18";
+            luckyColor = "Sea Green";
+            traits = "Compassionate, Imaginative, Intuitive";
+            famousPeople = "Rihanna, Albert Einstein, Kurt Cobain";
+        } else {
+            return "Unable to determine zodiac sign.";
+        }
+
+        // Create a formatted string with the zodiac information
+        var zodiacInfo = sign.toUpperCase() + " - " + description + "\n\n" +
+                         "Lucky Numbers: " + luckyNumbers + "\n" +
+                         "Lucky Color: " + luckyColor + "\n" +
+                         "Personality Traits: " + traits + "\n" +
+                         "Famous People: " + famousPeople;
+
+        return zodiacInfo;
+    } catch (error) {
+        return "Error occurred: " + error.message;
+    }
+}
+
+
+            // Create an HTML table
             var tableHtml = "<table>";
-            tableHtml += "<tr><th>Zodiac Sign</th><th>Description</th><th>Lucky Numbers</th><th>Lucky Color</th><th>Personality Traits</th><th>Famous People</th></tr>";
-            tableHtml += "<tr><td>" + sign + "</td><td>" + description + "</td><td>" + luckyNumbers + "</td><td>" + luckyColor + "</td><td>" + traits + "</td><td>" + famousPeople + "</td></tr>";
+            tableHtml += "<tr><th>Category</th><th>Information</th></tr>";
+            tableHtml += "<tr><td>Zodiac Sign</td><td>" + sign + "</td></tr>";
+            tableHtml += "<tr><td>Description</td><td>" + description + "</td></tr>";
+            tableHtml += "<tr><td>Lucky Numbers</td><td>" + luckyNumbers + "</td></tr>";
+            tableHtml += "<tr><td>Lucky Color</td><td>" + luckyColor + "</td></tr>";
+            tableHtml += "<tr><td>Personality Traits</td><td>" + traits + "</td></tr>";
+            tableHtml += "<tr><td>Famous People</td><td>" + famousPeople + "</td></tr>";
             tableHtml += "</table>";
+
             return tableHtml;
         }
     </script>
