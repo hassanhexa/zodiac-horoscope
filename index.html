@@ -8,21 +8,103 @@
 <body>
     <h1>Zodiac Horoscope</h1>
     <p>Enter your birthdate to see your horoscope:</p>
-    <form>
+    <form id="horoscopeForm">
         <label for="birthdate">Birthdate (MM/DD/YYYY):</label>
         <input type="text" id="birthdate" name="birthdate" required>
-        <button type="button" onclick="getHoroscope()">Get Horoscope</button>
+        <button type="button" onclick="getZodiacInfo()">Get Horoscope</button>
     </form>
     <div id="horoscopeResult"></div>
 
     <script>
-        function getHoroscope() {
-            var birthdate = document.getElementById("birthdate").value;
-            // You can make an AJAX request here to your Python code hosted on a server, 
-            // or you can convert your Python code to JavaScript and run it here.
-            // For simplicity, you can display a placeholder message.
+        function getZodiacInfo() {
+            var birthdateInput = document.getElementById("birthdate").value;
+            var zodiacInfo = calculateZodiacInfo(birthdateInput);
+
+            // Display the result
             var resultDiv = document.getElementById("horoscopeResult");
-            resultDiv.innerHTML = "Your horoscope will appear here.";
+            resultDiv.innerHTML = zodiacInfo;
+        }
+
+        function calculateZodiacInfo(birthdateStr) {
+            try {
+                // Parse the input birthdate string into a Date object
+                var birthdate = new Date(birthdateStr);
+
+                // Validate leap year
+                if (birthdate.getMonth() === 1 && birthdate.getDate() === 29 &&
+                    !(birthdate.getFullYear() % 4 === 0 && (birthdate.getFullYear() % 100 !== 0 || birthdate.getFullYear() % 400 === 0))) {
+                    return "Invalid birthdate (not a leap year).";
+                }
+
+                // Validate the date range
+                var minDate = new Date(1800, 0, 1);
+                var maxDate = new Date(2100, 11, 31);
+                if (!(birthdate >= minDate && birthdate <= maxDate)) {
+                    return "Invalid birthdate (out of range).";
+                }
+
+                // Determine the zodiac sign based on the birthdate
+                if ((3, 21) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (4, 19)) {
+                    return "Aries - You'll discover hidden talents and skills within yourself this month!" +
+                           "\nLucky Numbers: 7, 12, 21\nLucky Color: Red\nPersonality Traits: Energetic, Courageous, Spontaneous" +
+                           "\nFamous Aries: Lady Gaga, Leonardo da Vinci, Elton John";
+                } else if ((4, 20) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (5, 20)) {
+                    return "Taurus - Unexpected financial gains are coming your way. Be prepared!" +
+                           "\nLucky Numbers: 2, 6, 15\nLucky Color: Green\nPersonality Traits: Reliable, Patient, Practical" +
+                           "\nFamous Taurus: Adele, William Shakespeare, Audrey Hepburn";
+                } else if ((5, 21) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (6, 20)) {
+                    return "Gemini - A surprise adventure is on the horizon. Embrace the unexpected!" +
+                           "\nLucky Numbers: 5, 11, 23\nLucky Color: Yellow\nPersonality Traits: Adaptable, Curious, Witty" +
+                           "\nFamous Gemini: Angelina Jolie, Johnny Depp, Kanye West";
+                } else if ((6, 21) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (7, 22)) {
+                    return "Cancer - Your positive energy will attract good fortune. Stay optimistic!" +
+                           "\nLucky Numbers: 3, 9, 17\nLucky Color: Silver\nPersonality Traits: Nurturing, Intuitive, Protective" +
+                           "\nFamous Cancer: Princess Diana, Tom Hanks, Elon Musk";
+                } else if ((7, 23) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (8, 22)) {
+                    return "Leo - An old friend will reappear in your life, bringing joy and nostalgia!" +
+                           "\nLucky Numbers: 1, 8, 22\nLucky Color: Gold\nPersonality Traits: Charismatic, Confident, Creative" +
+                           "\nFamous Leo: Barack Obama, Jennifer Lopez, Mick Jagger";
+                } else if ((8, 23) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (9, 22)) {
+                    return "Virgo - A long-standing goal will finally be achieved. Celebrate your success!" +
+                           "\nLucky Numbers: 4, 10, 24\nLucky Color: Green\nPersonality Traits: Detail-Oriented, Practical, Analytical" +
+                           "\nFamous Virgo: Beyoncé, Mother Teresa, Tim Burton";
+                } else if ((9, 23) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (10, 22)) {
+                    return "Libra - A new love interest will enter your life. Keep an open heart!" +
+                           "\nLucky Numbers: 6, 15, 21\nLucky Color: Blue\nPersonality Traits: Charming, Diplomatic, Social" +
+                           "\nFamous Libra: Mahatma Gandhi, Kim Kardashian, Will Smith";
+                } else if ((10, 23) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (11, 21)) {
+                    return "Scorpio - Your creativity will reach new heights. Express yourself boldly!" +
+                           "\nLucky Numbers: 9, 18, 27\nLucky Color: Black\nPersonality Traits: Intense, Ambitious, Resourceful" +
+                           "\nFamous Scorpio: Leonardo DiCaprio, Marie Curie, Bill Gates";
+                } else if ((11, 22) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (12, 21)) {
+                    return "Sagittarius - Travel plans will unexpectedly fall into place. Pack your bags!" +
+                           "\nLucky Numbers: 3, 12, 21\nLucky Color: Purple\nPersonality Traits: Optimistic, Adventurous, Independent" +
+                           "\nFamous Sagittarius: Walt Disney, Taylor Swift, Brad Pitt";
+                } else if ((12, 22) <= (birthdate.getMonth() + 1, birthdate.getDate()) || (1, 1) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (1, 19)) {
+                    return "Capricorn - Stay cautious while traveling. Avoid unnecessary risks." +
+                           "\nLucky Numbers: 4, 8, 22\nLucky Color: Brown\nPersonality Traits: Disciplined, Ambitious, Practical" +
+                           "\nFamous Capricorn: Michelle Obama, Elvis Presley, Steve Jobs";
+                } else if ((1, 20) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (2, 18)) {
+                    return "Aquarius - Financial opportunities are coming your way. Be ready to seize them!" +
+                           "\nLucky Numbers: 5, 15, 23\nLucky Color: Aqua\nPersonality Traits: Innovative, Humanitarian, Eccentric" +
+                           "\nFamous Aquarius: Oprah Winfrey, Abraham Lincoln, Ellen DeGeneres";
+                } else if ((2, 19) <= (birthdate.getMonth() + 1, birthdate.getDate()) <= (3, 20)) {
+                    return "Pisces - A serendipitous encounter will lead to new and meaningful connections." +
+                           "\nLucky Numbers: 7, 12, 18\nLucky Color: Sea Green\nPersonality Traits: Compassionate, Imaginative, Intuitive" +
+                           "\nFamous Pisces: Rihanna, Albert Einstein, Kurt Cobain";
+                }
+
+                // If the birthdate is in the future
+                if (birthdate > new Date()) {
+                    return "Birthdate is in the future.";
+                }
+
+                // For all other cases, return an error message
+                return "Unable to determine zodiac sign.";
+
+            } catch (error) {
+                return "Invalid date format. Please use MM/DD/YYYY.";
+            }
         }
     </script>
 </body>
