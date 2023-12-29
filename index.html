@@ -165,15 +165,6 @@
                            "\nLucky Numbers: 7, 12, 18\nLucky Color: Sea Green\nPersonality Traits: Compassionate, Imaginative, Intuitive" +
                            "\nFamous Pisces: Rihanna, Albert Einstein, Kurt Cobain";
                 }
-                // If the birthdate is in the future
-                if (birthdate > new Date()) {
-                    return "Birthdate is in the future.";
-                }
-                // For all other cases, return an error message
-                return "Unable to determine zodiac sign.";
-            } catch (error) {
-                return "Invalid date format. Please use MM/DD/YYYY.";
-            }
 
             // Create an HTML table
             var tableHtml = "<table>";
